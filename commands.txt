@@ -1,0 +1,32 @@
+sudo apt install mosquitto mosquitto-clients
+sudo apt-add-repository ppa:mosquitto-dev/mosquitto-ppa
+sudo apt-get update
+mosquitto -c mosquitto.conf
+
+
+
+# Publish a temperature message to the MQTT broker
+mosquitto_pub -h localhost -t ac/temperature -m 100
+
+# Publish an ambient light level message to the MQTT broker
+mosquitto_pub -h localhost -t light/ambient_light_level -m 49
+
+# Publish a door status message to the MQTT broker
+mosquitto_pub -h localhost -t door/status -m "open"
+
+# Publish a smoke level message to the MQTT broker
+mosquitto_pub -h localhost -t smoke_detector/smoke_level -m 2
+
+# Publish a motion detected message to the MQTT broker
+mosquitto_pub -h localhost -t motion_sensor/motion_detected -m True
+
+
+# One-liner :
+
+Yes, you can publish messages to all of the topics in your example in one terminal command using the mosquitto_pub command with the -t option to specify multiple topics. The following command will publish the values of the variables temperature, ambient_light_level, door_status, smoke_level, and motion_detected to the corresponding topics:
+
+mosquitto_pub -h localhost -t "ac/temperature" -t "light/ambient_light_level" -t "door/status" -t "smoke_detector/smoke_level" -t "motion_sensor/motion_detected" -m <temperature> <ambient_light_level> <door_status> <smoke_level> <motion_detected>
+
+Example:
+
+mosquitto_pub -h localhost -t "ac/temperature" -t "light/ambient_light_level" -t "door/status" -t "smoke_detector/smoke_level" -t "motion_sensor/motion_detected" -m 25 100 "open" 100 "True"
